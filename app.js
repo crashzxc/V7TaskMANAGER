@@ -50,7 +50,7 @@ router.use(function(req, res, next) {
     next(); // make sure we go to the next routes and don't stop here
 });
 
-app.route('/API/TaskManager/addTaskItem')
+app.route('/TaskManager/addTaskItem')
 // create a Location (accessed at POST http://localhost:8080/api/TaskManager/addTaskItem)
     .post(function(req, res) {
         // create a new instance of the Location model
