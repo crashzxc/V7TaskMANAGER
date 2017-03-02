@@ -6,6 +6,7 @@
 var express = require('express');
 var cors = require('cors');
 var app = express();
+var TaskItem = require('./app/models/TaskItem');
 
 var bodyParser = require('body-parser');
 var firebase = require('firebase');
