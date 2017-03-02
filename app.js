@@ -23,11 +23,11 @@ var port = process.env.VCAP_APP_PORT || 3000;
 // =============================================================================
 // Initialize Firebase
 var config = {
-    apiKey: "AIzaSyCQo0oSHhpdya3RX8Mlj1iIecZjcPoX7RQ",
-    authDomain: "taskmanager-46e7a.firebaseapp.com",
-    databaseURL: "https://taskmanager-46e7a.firebaseio.com",
-    storageBucket: "taskmanager-46e7a.appspot.com",
-    messagingSenderId: "993267430044"
+    apiKey: "AIzaSyCMwvH5EcDM7GFzaobLfbs_ZBM6Sbvh1Xc",
+    authDomain: "taskmanagerv2.firebaseapp.com",
+    databaseURL: "https://taskmanagerv2.firebaseio.com",
+    storageBucket: "taskmanagerv2.appspot.com",
+    messagingSenderId: "355173053963"
 };
 firebase.initializeApp(config);
 var databaseReference = firebase.database();
