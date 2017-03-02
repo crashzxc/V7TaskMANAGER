@@ -3,20 +3,21 @@
 // =============================================================================
 //hello
 // call the packages we need
-var express = require('express')
-    , cors = require('cors')
-    , app = express();//https://github.com/expressjs/cors#simple-usage-enable-all-cors-requests
+var express = require('express');
+var cors = require('cors');
+var app = express();
 
-app.use(cors());
-var app = express();                 // define our app using express
 var bodyParser = require('body-parser');
-var TaskItem = require('./app/models/TaskItem');
 var firebase = require('firebase');
 var moment = require('moment');
 var https = require('https');
 var request = require('request');
-moment = require('moment-timezone');
-require('moment-duration-format');
+
+app.use(bodyParser.urlencoded({ extended: true }));// support encoded bodies
+app.use(bodyParser.json()); //Support JSON encoded bodies
+app.use(cors());//Enable cors for all routes
+var port = process.env.VCAP_APP_PORT || 3000;
+
 
 // SETUP FIREBASE
 // =============================================================================
