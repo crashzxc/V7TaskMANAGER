@@ -1,43 +1,41 @@
 {
-	"name": "NodejsStarterApp",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node app.js"
-	},
-	"dependencies": {
-		"express": "4.13.x",
-		"moment": "2.x.x",
-		"cfenv": "1.0.3",
-		"request": "2.x.x",
-		"https": "1.0.0",
-		"cron": "^1.1.0",
-		"firebase": "^3.2.0",
-		"async": "^1.5.2",
-		"body-parser": "1.15.0",
-		"cors": "2.8.x",
-		"cf-deployment-tracker-client": "0.1.1",
-		"cloudant": "1.4.1",
-		"commander": "2.8.1",
-		"connect-redis": "3.0.2",
-		"cookie-parser": "1.4.1",
-		"dotenv": "2.0.0",
-		"express-csv": "0.6.0",
-		"express-force-ssl": "0.3.0",
-		"express-session": "1.13.0",
-		"hbs": "3.1.1",
-		"http-post": "0.1.1",
-		"node-uuid": "1.4.7",
-		"passport": "0.3.2",
-		"passport-idaas-openidconnect": "1.0.0",
-		"restler": "3.4.0",
-		"underscore": "1.8.3",
-		"validator": "5.1.0"
-	},
-	"repository": {
-
-	},
-	"engines": {
-		"node": "4.x"
-	}
+  "name": "NodejsStarterApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "async": "^1.5.2",
+    "body-parser": "^1.15.0",
+    "cf-deployment-tracker-client": "0.1.1",
+    "cfenv": "1.0.3",
+    "cloudant": "1.4.1",
+    "commander": "2.8.1",
+    "connect-redis": "3.0.2",
+    "cookie-parser": "1.4.1",
+    "cors": "^2.8.1",
+    "cron": "^1.1.0",
+    "dotenv": "2.0.0",
+    "express": "4.13.x",
+    "express-csv": "0.6.0",
+    "express-force-ssl": "0.3.0",
+    "express-session": "1.13.0",
+    "firebase": "^3.7.0",
+    "hbs": "3.1.1",
+    "http-post": "0.1.1",
+    "https": "^1.0.0",
+    "moment": "^2.17.1",
+    "node-uuid": "1.4.7",
+    "passport": "0.3.2",
+    "passport-idaas-openidconnect": "1.0.0",
+    "request": "^2.79.0",
+    "restler": "3.4.0",
+    "underscore": "1.8.3",
+    "validator": "5.1.0"
+  },
+  "repository": {},
+  "engines": {
+    "node": "4.x"
+  }
 }
