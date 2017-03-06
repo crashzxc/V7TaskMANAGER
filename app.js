@@ -7,11 +7,13 @@ var express = require('express');
 var cors = require('cors');
 var app = express();
 var TaskItem = require('./app/models/TaskItem');
+var Priority = require('./app/models/Priority');
 
 var bodyParser = require('body-parser');
 var firebase = require('firebase');
 var moment = require('moment');
 var https = require('https');
+var hashMap = require('hashmap');
 var request = require('request');
 
 app.use(bodyParser.urlencoded({ extended: true }));// support encoded bodies
@@ -33,6 +35,7 @@ var config = {
 firebase.initializeApp(config);
 var databaseReference = firebase.database();
 var locationsDbRef = databaseReference.ref('tasks');
+var priorityDbRef = databaseReference.ref('priority');
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -55,7 +58,7 @@ router.route('/TaskManager/addTaskItem')
 // create a Location (accessed at POST http://localhost:8080/api/TaskManager/addTaskItem)
     .post(function(req, res) {
         // create a new instance of the Location model
-        var location = new TaskItem(locationsDbRef,req.body.taskName);
+        var location = new TaskItem(locationsDbRef,req.body.taskName,req.body.priorityID);
         // save the bear and check for errors
         location.saveToFirebase(function(err) {
             if (err)
@@ -69,11 +72,53 @@ router.route('/TaskManager/getAllTasks')
     .get(function (req,res){
         var ref = databaseReference.ref('tasks');
 
+        var allTasks = [];
         ref.on("value", function(snap) {
-            res.json(snap.val());
+            snap.forEach(function (data) {
+                var taskname= data.val().task_name;
+                var createDateTime = data.val().create_date_time;
+                var taskKey = data.key;
+                var TaskData = new taskData(taskKey,taskname,createDateTime);
+
+                allTasks.push(TaskData);
+            });
+
+            res.json(allTasks);
         }, function (error) {
             console.log("Error: " + error.code);
         });
+    });
+
+//Seed the priority values in firebase
+router.route('/TaskManager/addPriority')
+    .post(function (req,res) {
+        var location = new Priority(priorityDbRef,req.body.priorityName);
+        //save the bear and check for errors
+        location.saveToFirebase(function (err) {
+            if(err){
+                res.send(err);
+            }
+            res.json({message:'Priority Item data created in Firebase'});
+        });
+    });
+
+router.route('/TaskManager/getPriority')
+    .get(function (req,res) {
+        var ref = databaseReference.ref('priority');
+        var allPriority = [];
+        ref.on('value',function (snap) {
+            snap.forEach(function (data) {
+                var priorityName = data.val().priority_name;
+                var priorityId = data.key;
+                var priorityData = new priorityDataValue(priorityId,priorityName);
+
+                allPriority.push(priorityData);
+            });
+            res.json(allPriority);
+        },function (error) {
+            console.log('Error:  '+error.code);
+        });
+
     });
 
 app.route('/TaskManager/updateTask/:id')
@@ -103,6 +148,17 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });
 
 });
+
+function taskData(inTaskId,inTaskName,inCreatedDateTime) {
+    this.task_id = inTaskId;
+    this.task_name = inTaskName;
+    this.created_date_time = inCreatedDateTime;
+}
+
+function priorityDataValue(inPriorityId,inPriorityName){
+    this.priority_id = inPriorityId;
+    this.priority_name = inPriorityName;
+}
 
 // more routes for our API will happen here
 
